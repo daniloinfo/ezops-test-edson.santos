@@ -36,7 +36,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: chat-application
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        image: 853644810240.dkr.ecr.sa-east-1.amazonaws.com/chat-application:$IMAGE_TAG
 
     - name: Deploy to Amazon ECS service
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
