@@ -15,13 +15,17 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
+    
+    - name: Inject slug/short variables
+      uses: rlespinasse/github-slug-action@v2.x
         
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: chat-application
         IMAGE_TAG: ${env.GITHUB_SHA_SHORT} #pegando a short hash do commit ref: https://gist.github.com/lwiedenhoeft/c2bf48e128cbc1213bc5d3412212add38a4d
-      run: |
+      
+        run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
