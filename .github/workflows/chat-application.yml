@@ -4,7 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v1 # faz checkout do meu repositório ref https://github.com/actions/checkout
+    - uses: actions/checkout@v1
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -15,31 +15,26 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-    
-    - name: Inject slug/short variables
-      uses: rlespinasse/github-slug-action@v2.x # usando o slug para diminuir a hash do commit
         
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: chat-application
-#       IMAGE_TAG: $(echo ${github.sha} | cut -c1-8)
-      
-        run: |
+       #IMAGE_TAG: ${{ github.sha }}
+      run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-
     - name: Render Amazon ECS task definition
       id: render-web-container
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: chat-application
-#       IMAGE_TAG: $(echo ${github.sha} | cut -c1-8)
+       #IMAGE_TAG: ${{ github.sha }}
       with:
         task-definition: task-definition.json
         container-name: chat-application
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$latest
+        image: 853644810240.dkr.ecr.sa-east-1.amazonaws.com/chat-application:latest
 
     - name: Deploy to Amazon ECS service
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
