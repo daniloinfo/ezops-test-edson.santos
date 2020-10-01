@@ -19,7 +19,7 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ezops-test-edson.santos
+        ECR_REPOSITORY: chat-application
         IMAGE_TAG: ${{ github.sha }}
       run: |
         ls -la
