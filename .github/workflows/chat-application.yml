@@ -31,7 +31,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ezops-test-edson.santos
+        ECR_REPOSITORY: chat-application
         IMAGE_TAG: ${{ github.sha }}
       with:
         task-definition: task-definition.json
