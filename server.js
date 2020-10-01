@@ -16,12 +16,6 @@ var Message = mongoose.model('Message',{
 // alterado a connection string do mongodb
 var dbUrl = 'mongodb+srv://admin:ftixn1Hx6CHR7LO2@chat-application.ypjjk.mongodb.net/chat-application?retryWrites=true&w=majority'
 
-/* --New Feature--
-Remover mensagens sempre que a aplicação subir */
-app.get('/messages', (err, message) => {
-  Message.remove()
-  })
-
 
 app.get('/messages', (req, res) => {
   Message.find({},(err, messages)=> {
