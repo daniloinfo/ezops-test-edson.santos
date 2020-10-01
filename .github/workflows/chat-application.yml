@@ -16,12 +16,12 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
   
     - name: Build, tag, and push image to Amazon ECR
-      uses: actions/checkout@v2
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ezops-test-edson.santos
         IMAGE_TAG: ${{ github.sha }}
       run: |
+        ls -la
         docker build -t 853644810240.dkr.ecr.sa-east-1.amazonaws.com/ezops-test-edson.santos:$IMAGE_TAG .
         docker push 853644810240.dkr.ecr.sa-east-1.amazonaws.com/ezops-test-edson.santos:$IMAGE_TAG
 
