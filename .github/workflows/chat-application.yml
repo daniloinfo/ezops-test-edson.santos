@@ -23,11 +23,11 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: chat-application
-        IMAGE_TAG: $(echo ${GITHUB_SHA} | cut -c1-8) #pegando a short hash do commit ref: https://gist.github.com/lwiedenhoeft/c2bf48e128cbc1213bc5d3412212add38a4d
+        IMAGE_TAG: $(echo ${github.sha} | cut -c1-8)
       
         run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$(echo ${GITHUB_SHA} | cut -c1-8) .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$(echo ${GITHUB_SHA} | cut -c1-8)
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Render Amazon ECS task definition
       id: render-web-container
@@ -35,11 +35,11 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: chat-application
-        IMAGE_TAG: $(echo ${GITHUB_SHA} | cut -c1-8)
+        IMAGE_TAG: $(echo ${github.sha} | cut -c1-8)
       with:
         task-definition: task-definition.json
         container-name: chat-application
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$(echo ${GITHUB_SHA} | cut -c1-8)
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Deploy to Amazon ECS service
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
