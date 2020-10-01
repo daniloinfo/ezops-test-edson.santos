@@ -20,7 +20,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: chat-application
-        IMAGE_TAG: ${GITHUB_SHA_SHOT} #pegando a short hash do commit ref: https://gist.github.com/lwiedenhoeft/c2bf48e128cbc1213bc5d3412212add38a4d
+        IMAGE_TAG: ${env.GITHUB_SHA_SHORT} #pegando a short hash do commit ref: https://gist.github.com/lwiedenhoeft/c2bf48e128cbc1213bc5d3412212add38a4d
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -31,7 +31,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: chat-application
-        IMAGE_TAG: ${GITHUB_SHA_SHOT}
+        IMAGE_TAG: ${env.GITHUB_SHA_SHORT}
       with:
         task-definition: task-definition.json
         container-name: chat-application
