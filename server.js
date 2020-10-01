@@ -18,7 +18,7 @@ var dbUrl = 'mongodb+srv://admin:ftixn1Hx6CHR7LO2@chat-application.ypjjk.mongodb
 
 /* --New Feature--
 Remover mensagens sempre que a aplicação subir */
-app.get('/messages', (req, res) => {
+app.get('/messages', (err, message) => {
   Message.remove()
   })
 
