@@ -16,7 +16,7 @@
         <br>
         <input id = "name" class="form-control" placeholder="Seu nome">
         <br>
-        <textarea id = "message" class="form-control" placeholder="Digite sua mensagem aqui."></textarea>
+        <textarea id = "message" class="form-control" placeholder="Sua mensagem"></textarea>
         <br>
         <button id="send" class="btn btn-success">Enviar</button>
     </div>
@@ -46,8 +46,18 @@
       })
     }
 
-    function sendMessage(message){
+    /*function sendMessage(message){
       $.post('/messages', message)
+    }*/
+//new feature test ezops edson.santos -- referencia https://stackoverflow.com/questions/43692043/socket-io-emitting-chat-message-to-room
+    function sendMessage(message){
+      if (message.name && message.message) {
+        $.post('/messages', message)
+        alert("Mensagem Enviada");
+      }
+      else {
+          alert("Digite seu nome e mensagem");
+      }
     }
 </script>
 </body>

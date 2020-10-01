@@ -13,6 +13,7 @@ var Message = mongoose.model('Message',{
   name : String,
   message : String
 })
+
 // alterado a connection string do mongodb
 var dbUrl = 'mongodb+srv://admin:ftixn1Hx6CHR7LO2@chat-application.ypjjk.mongodb.net/chat-application?retryWrites=true&w=majority'
 
