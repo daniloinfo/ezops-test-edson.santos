@@ -37,7 +37,7 @@
         "memoryReservation": null,
         "volumesFrom": [],
         "stopTimeout": null,
-        "image": "853644810240.dkr.ecr.sa-east-1.amazonaws.com/ezops-test-edson.santos",
+        "image": "853644810240.dkr.ecr.sa-east-1.amazonaws.com/chat-application",
         "startTimeout": null,
         "firelensConfiguration": null,
         "dependsOn": null,
