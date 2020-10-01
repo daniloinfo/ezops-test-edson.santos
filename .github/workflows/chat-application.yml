@@ -21,6 +21,7 @@ jobs:
         ECR_REPOSITORY: ezops-test-edson.santos
         IMAGE_TAG: ${{ github.sha }}
       run: |
+        cd ..
         ls -la
         docker build -t 853644810240.dkr.ecr.sa-east-1.amazonaws.com/ezops-test-edson.santos:$IMAGE_TAG .
         docker push 853644810240.dkr.ecr.sa-east-1.amazonaws.com/ezops-test-edson.santos:$IMAGE_TAG
