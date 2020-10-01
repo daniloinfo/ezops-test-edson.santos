@@ -1,4 +1,5 @@
 {
+    "executionRoleArn": "arn:aws:iam::853644810240:role/ecsTaskExecutionRole",
     "family": "chat-application", 
     "networkMode": "awsvpc", 
     "containerDefinitions": [
