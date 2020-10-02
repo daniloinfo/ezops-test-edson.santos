@@ -2,7 +2,7 @@
   "name": "chat-application",
   "version": "1.0.0",
   "description": "Aplicao de chat em tempo real",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "jasmine"
   },
